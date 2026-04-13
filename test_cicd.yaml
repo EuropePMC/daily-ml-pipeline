@@ -1,0 +1,21 @@
+name: Test SSH Connection
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: codon-slurm-login
+          username: stirunag
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            echo "Connected successfully"
+            whoami
+            hostname
